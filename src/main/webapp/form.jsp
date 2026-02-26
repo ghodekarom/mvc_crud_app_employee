@@ -31,7 +31,7 @@
         <%}%>
 
         <label>Enter Name:</label>
-        <input type="text" name="name" value=" <%= (request.getParameter("name")!=null)? request.getParameter("name") : (flag)?e.getName():""%>"><br>
+        <input type="text" name="name" value="<%= (request.getParameter("name")!=null)? request.getParameter("name") : (flag)?e.getName():""%>"  pattern="^[A-Za-z ]{2,50}$" title="Name is required and must contain only alphabets (2–50 characters)." required><br>
         <%
         String nameerror = (String)request.getAttribute("nameerror");
         if(nameerror!=null){
@@ -40,7 +40,7 @@
         <%}%>
 
         <label>Enter Email:</label>
-        <input type="text" name="email" value="<%= (request.getParameter("email")!=null)? request.getParameter("email") :  (flag)?e.getEmail():""%>" ><br>
+        <input type="text" name="email" value="<%= (request.getParameter("email")!=null)? request.getParameter("email") :  (flag)?e.getEmail():""%>" pattern="^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$" title="Email is required and must be a valid email address (eg- name10@gmail.com)." required><br>
         <%
         String emailerror = (String)request.getAttribute("emailerror");
         if(emailerror!=null){
@@ -49,7 +49,7 @@
         <%}%>
 
         <label>Enter Department:</label>
-        <input type="text" name="department" value="<%= (request.getParameter("department")!=null)? request.getParameter("department") : (flag)?e.getDepartment():""%>" ><br>
+        <input type="text" name="department" value="<%= (request.getParameter("department")!=null)? request.getParameter("department") : (flag)?e.getDepartment():""%>"  pattern="^[A-Za-z ]{2,50}$" title="Department must contain only alphabets (2–50 characters)" required><br>
         <%
         String departmenterror = (String)request.getAttribute("departmenterror");
         if(departmenterror!=null){
@@ -58,7 +58,7 @@
         <%}%>
 
         <label>Enter Designation:</label>
-        <input type="text" name="designation" value="<%=  (request.getParameter("designation")!=null)? request.getParameter("designation") : (flag)?e.getDesignation():""%>" ><br>
+        <input type="text" name="designation" value="<%=  (request.getParameter("designation")!=null)? request.getParameter("designation") : (flag)?e.getDesignation():""%>" pattern="^[A-Za-z ]{2,50}$"  title="Designation must contain only alphabets (2–50 characters)" required><br>
         <%
         String designationerror = (String)request.getAttribute("designationerror");
         if(designationerror!=null){
@@ -67,7 +67,7 @@
         <%}%>
 
         <label>Enter Salary:</label>
-        <input type="text" name="salary" value="<%= (request.getParameter("salary")!=null)? request.getParameter("salary") : (flag)?e.getSalary():""%>" ><br>
+        <input type="text" name="salary" value="<%= (request.getParameter("salary")!=null)? request.getParameter("salary") : (flag)?e.getSalary():""%>" required><br>
         <%
         String salaryerror = (String)request.getAttribute("salaryerror");
         if(salaryerror!=null){

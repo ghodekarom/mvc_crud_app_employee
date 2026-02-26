@@ -11,7 +11,7 @@
     <%
     String msg = (String)request.getAttribute("errmsg");
     Throwable cause = (Throwable)request.getAttribute("errcause");
-    exception = (Throwable)request.getAttribute("erexception");
+    exception = (Throwable)request.getAttribute("errexception");
     %>
 
     <p><%= msg %></p>
