@@ -1,5 +1,6 @@
 drop database if exists employeedb;
 create database employeedb;
+\c employeedb
 
 drop table if exists employee;
 create table employee(id serial primary key,name varchar(20),email varchar(20),department varchar(20),designation varchar(20),salary float);
