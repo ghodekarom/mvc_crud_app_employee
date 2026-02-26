@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page isErrorPage="true" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +7,16 @@
     <title>mvc_crud_app</title>
 </head>
 <body>
-    <h3>Error Occured</h3>
+
+    <%
+    String msg = (String)request.getAttribute("errmsg");
+    Throwable cause = (Throwable)request.getAttribute("errcause");
+    exception = (Throwable)request.getAttribute("erexception");
+    %>
+
+    <p><%= msg %></p>
+    <p><%= cause %></p>
+    <p><%= exception %></p>
+
 </body>
 </html>
