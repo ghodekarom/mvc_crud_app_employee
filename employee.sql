@@ -10,3 +10,8 @@ insert into employee(name,email,department,designation,salary) values('Vinayak G
 insert into employee(name,email,department,designation,salary) values('Rudresh Honrao','rudresh@gmail.com','it','fullstack developer',28000);
 
 select * from employee;
+
+\c employeedb
+create table users(name varchar(20),username varchar(20) unique,userpassword varchar(20));
+insert into users values('Om Ghodekar','om@gmail.com','password');
+select * from users;
