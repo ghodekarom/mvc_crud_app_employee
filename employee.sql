@@ -12,6 +12,6 @@ insert into employee(name,email,department,designation,salary) values('Rudresh H
 select * from employee;
 
 \c employeedb
-create table users(name varchar(20),username varchar(20) unique,userpassword varchar(20));
+create table users(id serial primary key, name varchar(20),username varchar(20) unique,userpassword varchar(20));
 insert into users values('Om Ghodekar','om@gmail.com','password');
 select * from users;
