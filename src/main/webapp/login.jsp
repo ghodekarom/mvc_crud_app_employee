@@ -150,12 +150,12 @@
         <label>enter username:</label>
         <input type="text" name="username"
         pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$"
-        title="Enter valid username e.g-omghodekar13@gmail.com">
+        title="Enter valid username e.g-omghodekar13@gmail.com" required autocomplete="off">
 
         <label>enter userpassword:</label>
         <input type="password" name="userpassword"
         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
-        title="Password must be at least 8 characters with uppercase, lowercase, number and special character">
+        title="Password must be at least 8 characters with uppercase, lowercase, number and special character" required autocomplete="off">
 
         <input type="submit" value="Login">
 
