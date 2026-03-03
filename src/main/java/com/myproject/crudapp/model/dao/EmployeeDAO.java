@@ -1,6 +1,7 @@
 package com.myproject.crudapp.model.dao;
 
 import com.myproject.crudapp.model.entity.Employee;
+import com.myproject.crudapp.model.entity.Pagination;
 
 import java.util.List;
 
@@ -10,6 +11,6 @@ public interface EmployeeDAO {
     int updateRecord(Employee e);
     int deleteRecord(int id);
     Employee getRecordById(int id);
-    List<Employee> displayRecords();
-
+    List<Employee> displayRecords(Pagination pagination);
+    int countRecords();
 }
