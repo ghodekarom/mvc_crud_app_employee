@@ -4,6 +4,7 @@ import com.myproject.crudapp.model.dao.EmployeeDAO;
 import com.myproject.crudapp.model.dao.EmployeeDAOExcep;
 import com.myproject.crudapp.model.dao.EmployeeDAOImp;
 import com.myproject.crudapp.model.entity.Employee;
+import com.myproject.crudapp.model.entity.Pagination;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -11,7 +12,7 @@ import java.io.*;
 import java.util.List;
 import java.util.regex.Pattern;
 
-@WebServlet(urlPatterns = {"/","/employee"})
+@WebServlet("/employee")
 public class EmployeeServlet extends HttpServlet {
 
     private EmployeeDAO dao;
@@ -66,9 +67,9 @@ public class EmployeeServlet extends HttpServlet {
             }
 
         } catch (EmployeeDAOExcep exception) {
-            req.setAttribute("errmsg", exception.getMessage());
-            req.setAttribute("errcause", exception.getCause());
-            req.setAttribute("errexception", exception);
+            req.setAttribute("excepmsg", exception.getMessage());
+            req.setAttribute("excepcause", exception.getCause());
+            req.setAttribute("excep", exception);
             req.getRequestDispatcher("error.jsp").forward(req, resp);
         }
 
@@ -76,8 +77,39 @@ public class EmployeeServlet extends HttpServlet {
 
     private void displayEmployees(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<Employee> elist = dao.displayRecords();
+        //bydefault
+        int page=1;
+        int pagesize=5;
+
+        if(req.getParameter("page")!=null)
+            page = Integer.parseInt(req.getParameter("page"));
+        if(req.getParameter("pagesize")!=null)
+            pagesize = Integer.parseInt(req.getParameter("pagesize"));
+
+
+        int totalrecords = dao.countRecords();
+        int totalpages = (int)(Math.ceil((double)totalrecords/pagesize));
+
+        if(page<1){
+            page=1;
+        }
+        if(page>totalpages ){
+            page=totalpages;
+        }
+
+
+
+        Pagination pagination = new Pagination(page,pagesize);
+
+        List<Employee> elist = dao.displayRecords(pagination);
+
         req.setAttribute("list", elist);
+        req.setAttribute("totalpages",totalpages);
+        req.setAttribute("currentpage",page);
+        req.setAttribute("currentpagesize",pagesize);
+        req.setAttribute("totalrecords",totalrecords);
+
+
         req.getRequestDispatcher("list.jsp").forward(req, resp);
     }
 
