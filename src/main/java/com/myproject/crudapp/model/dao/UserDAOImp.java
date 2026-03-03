@@ -39,7 +39,7 @@ public class UserDAOImp implements UserDAO{
            try(ResultSet rs = pslogin.executeQuery()){
 
                if(rs.next()){
-                   user = new User(rs.getString(1),rs.getString(2),rs.getString(3));
+                   user = new User(rs.getString(2),rs.getString(3));
                }
 
            }catch(SQLException se){
@@ -54,19 +54,26 @@ public class UserDAOImp implements UserDAO{
 
     @Override
     public boolean exists(String username) {
-       boolean flag=false;
+       boolean ans=false;
 
        try(Connection c = DBConnect.fetchConnection();
-       PreparedStatement psexists = c.prepareStatement("select * from users where username=?");
-       ResultSet rs = psexists.executeQuery()){
+       PreparedStatement psexists = c.prepareStatement("select * from users where username=?")){
 
-           if(rs.next()){
-               flag = true;
+           psexists.setString(1,username);
+
+           try(ResultSet rs = psexists.executeQuery()){
+
+               if(rs.next()){
+                   ans=true;
+               }
+
+           }catch(SQLException se){
+               throw new EmployeeDAOExcep("erorr during searching record:"+se.getMessage(),se);
            }
 
        }catch(SQLException se){
            throw new EmployeeDAOExcep("error during searching user"+se.getMessage(),se);
        }
-       return flag;
+       return ans;
     }
 }
